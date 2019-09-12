@@ -16,5 +16,17 @@ memory.dmp HANDLE 0x0000000000000028
 Process Completed (1)(87)
 ```
 
+# Compiling
+
+For 64 bits systems
+```
+x86_64-w64-mingw32-gcc.exe dump.c -o dump64.exe
+```
+
+For 32 bits systems
+```
+mingw32-gcc.exe dump.c -o dump.exe
+```
+
 # Credit 
 Mr.Un1k0d3r RingZer0 Team
