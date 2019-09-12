@@ -1,6 +1,6 @@
-# MiniDumpInC
+# MiniDump
 
-alternative to procdump
+alternative to procdump written in `C#` (perfect for execute-assembly) and `C`.
 
 # Usage
 ```
