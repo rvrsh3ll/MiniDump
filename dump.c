@@ -30,11 +30,14 @@ int main(int argc, char **argv) {
 
     if(hFile == INVALID_HANDLE_VALUE) {
         printf("Can't create memory.dmp. Exiting (%ld)\n", GetLastError());
+        CloseHandle(hProc);
         ExitProcess(0);
     }
 
     bSuccess = MiniDumpWriteDump(hProc, PID, hFile, 2, NULL, NULL, NULL);
     printf("Process Completed (%d)(%ld)", (DWORD)bSuccess, GetLastError());
 
+    CloseHandle(hProc);
+    CloseHandle(hFile);
     return 0;
 }
