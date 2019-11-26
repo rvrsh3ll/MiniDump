@@ -62,7 +62,7 @@ namespace MiniDump
             }
 
             bSuccess = miniDumpWriteDump(hProc, PID, hFile, 2, IntPtr.Zero, IntPtr.Zero, IntPtr.Zero);
-            Console.WriteLine("Process Completed ({0})(%ld)", bSuccess);
+            Console.WriteLine("Process Completed ({0})", bSuccess);
         }
     }
 }
