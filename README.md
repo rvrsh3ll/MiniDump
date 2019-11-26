@@ -4,11 +4,11 @@ alternative to procdump written in `C#` (perfect for execute-assembly) and `C`.
 
 # Usage
 ```
-dump.exe PID
+MiniDumpCs.exe PID
 ```
 
 ```
-> dump.exe 620
+> MiniDumpCs.exe 620
 MiniDumpWriteDump found at 0x000007FEE3891EF0
 Trying to dump PID: 620
 Process HANDLE 0x0000000000000024
