@@ -16,7 +16,7 @@ memory.dmp HANDLE 0x0000000000000028
 Process Completed (1)(87)
 ```
 
-# Compiling
+# Compiling the C version
 
 For 64 bits systems
 ```
@@ -27,6 +27,9 @@ For 32 bits systems
 ```
 mingw32-gcc.exe dump.c -o dump.exe
 ```
+
+# EDRs bypass
+Both the `C` and `C#` version offer a `64 bits` version that is patching the code to avoid user mode hook put in place by most EDRs. 
 
 # Credit 
 Mr.Un1k0d3r RingZer0 Team
