@@ -48,7 +48,7 @@ int main (int argc, char **argv) {
     }
 
     printf("Trying to dump PID: %d\n", PID);
-    hProc = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, FALSE, PID);
+    hProc = OpenProcess(PROCESS_ALL_ACCESS, FALSE, PID);
     printf("Process HANDLE 0x%p\n", hProc);
 
     if(hProc == NULL) {
