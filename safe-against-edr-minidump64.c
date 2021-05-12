@@ -30,8 +30,7 @@ VOID PatchHook(CHAR* address, unsigned char id, char high) {
 
 int main (int argc, char **argv) {
     CleanUp();
-
-    // No More Hook From CrowdStrike
+    
     // Malicious Code
     DWORD PID = atoi(argv[1]);
     HANDLE hProc = NULL;
