@@ -1,7 +1,38 @@
 #include <windows.h>
 #include <stdio.h>
 
+void GetSeDebugPriv() {
+    HANDLE hProc = OpenProcess(PROCESS_ALL_ACCESS, TRUE, GetCurrentProcess());
+    HANDLE hToken = NULL;
+    TOKEN_PRIVILEGES tp;
+
+    printf("Remote process HANDLE %p\n", hProc);
+
+    OpenProcessToken(hProc, TOKEN_ADJUST_PRIVILEGES | TOKEN_QUERY, &hToken);
+
+    printf("Remote process token HANDLE %p\n", hToken);
+
+    tp.PrivilegeCount = 1;
+    tp.Privileges[0].Attributes = SE_PRIVILEGE_ENABLED;
+
+    LookupPrivilegeValueA(NULL, SE_DEBUG_NAME, &tp.Privileges[0].Luid);
+
+    AdjustTokenPrivileges(hToken, FALSE, &tp, 0, NULL, NULL);
+
+    if(GetLastError() == ERROR_NOT_ALL_ASSIGNED) {
+        printf("Granting SeDebugPrivilege failed\n");
+    } else {
+        printf("You know have the SeDebugPrivilege\n");
+    }
+
+    CloseHandle(hToken);
+    CloseHandle(hProc);
+
+    return 0;
+}
+
 int main(int argc, char **argv) {
+    GetSeDebugPriv();
     DWORD PID = atoi(argv[1]);
     HANDLE hProc = NULL;
     HANDLE hFile = NULL;
@@ -17,7 +48,7 @@ int main(int argc, char **argv) {
     }
 
     printf("Trying to dump PID: %d\n", PID);
-    hProc = OpenProcess(PROCESS_QUERY_INFORMATION | PROCESS_VM_READ, FALSE, PID);
+    hProc = OpenProcess(PROCESS_ALL_ACCESS, FALSE, PID);
     printf("Process HANDLE 0x%p\n", hProc);
 
     if(hProc == NULL) {
