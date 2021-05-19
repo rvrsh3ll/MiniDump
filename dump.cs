@@ -38,8 +38,9 @@ namespace MiniDump
             MiniDumpWriteDump miniDumpWriteDump = (MiniDumpWriteDump)Marshal.GetDelegateForFunctionPointer(createPtr, typeof(MiniDumpWriteDump));
 
             Console.WriteLine("MiniDumpWriteDump found at 0x{0}", createPtr.ToString("X"));
-            // PROCESS_QUERY_INFORMATION | PROCESS_VM_READ = 1040
-            hProc = OpenProcess(1040, false, PID);
+            
+            // PROCESS_ALL_ACCESS 0x001F0FFF
+            hProc = OpenProcess(0x001F0FFF, false, PID);
             Console.WriteLine("Process HANDLE 0x{0}\n", hProc.ToString("X"));
 
             if (hProc == IntPtr.Zero)
