@@ -55,8 +55,6 @@ VOID GetSeDebugPriv() {
 
     CloseHandle(hToken);
     CloseHandle(hProc);
-
-    return 0;
 }
 
 int main (int argc, char **argv) {
