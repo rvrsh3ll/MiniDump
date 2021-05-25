@@ -2,7 +2,7 @@
 #include <stdio.h>
 
 void GetSeDebugPriv() {
-    HANDLE hProc = OpenProcess(PROCESS_ALL_ACCESS, TRUE, GetCurrentProcess());
+    HANDLE hProc = GetCurrentProcess();
     HANDLE hToken = NULL;
     TOKEN_PRIVILEGES tp;
 
@@ -22,7 +22,7 @@ void GetSeDebugPriv() {
     if(GetLastError() == ERROR_NOT_ALL_ASSIGNED) {
         printf("Granting SeDebugPrivilege failed\n");
     } else {
-        printf("You know have the SeDebugPrivilege\n");
+        printf("You now have the SeDebugPrivilege\n");
     }
 
     CloseHandle(hToken);
