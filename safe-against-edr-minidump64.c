@@ -4,6 +4,7 @@
 #include <stdlib.h>
 
 VOID PatchHook(CHAR* address, unsigned char id, char high);
+VOID GetSeDebugPriv();
 
 VOID CleanUp() {
     HANDLE hDll = LoadLibrary("ntdll.dll");
@@ -28,12 +29,12 @@ VOID PatchHook(CHAR* address, unsigned char id, char high) {
     memcpy(patch_address, patch, dwSize);
 }
 
-void GetSeDebugPriv() {
-    HANDLE hProc = OpenProcess(PROCESS_ALL_ACCESS, TRUE, GetCurrentProcess());
+VOID GetSeDebugPriv() {
+    HANDLE hProc = GetCurrentProcess();
     HANDLE hToken = NULL;
     TOKEN_PRIVILEGES tp;
 
-    printf("Remote process HANDLE %p\n", hProc);
+    printf("current process HANDLE %p\n", hProc);
 
     OpenProcessToken(hProc, TOKEN_ADJUST_PRIVILEGES | TOKEN_QUERY, &hToken);
 
@@ -49,7 +50,7 @@ void GetSeDebugPriv() {
     if(GetLastError() == ERROR_NOT_ALL_ASSIGNED) {
         printf("Granting SeDebugPrivilege failed\n");
     } else {
-        printf("You know have the SeDebugPrivilege\n");
+        printf("You now have the SeDebugPrivilege\n");
     }
 
     CloseHandle(hToken);
